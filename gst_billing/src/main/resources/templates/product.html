@@ -3,35 +3,61 @@
 <head>
     <title>Edit</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+ 
+ <style>
+   #nav {
+    color: white;
+    background-color:#323232;
+    width:97%;
+    margin-bottom:32px;
+    display:inline-block;
+    padding : 18px;
+  }
+  
+.btn{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #4CAF50;
+  color: white;
+  width:50%;
+}
+#form {
+    width:50%;
+    padding:12px;
+}
+
+input {
+    width:60%;
+    margin: 32px 12px;
+}
+
+label {
+    width:40%;
+    margin: 32px 12px;
+}        
+ </style>    
+
 </head>
+
 <body>
-   <div>
-     <h1>Product</h1>
+   <div id="nav">
+     <h1>GST Billing</h1>
    </div>
-   
-   <form th:action="@{/product/update}" method="post" >
-     <table>
-       <tr>
-         <td><h5>Product Code</h5></td>
-         <td><input type="number" name="productCode" th:value="${product.productCode}"></td>
-       </tr>
-       <tr>
-         <td><h5>Product Name</h5></td>
-         <td><input type="text" name="productName" th:value="${product.productName}"></td>
-       </tr>
-       <tr>
-         <td><h5>Product Price</h5></td>
-         <td><input type="number"  name="productPrice" th:value="${product.productPrice}"></td>
-       </tr>
-       <tr>
-         <td><h5>Product GST</h5></td>
-         <td><input type="number"  name="productGst" th:value="${product.productGst}"></td>
-       </tr>
-       <tr>
-         <td><a th:href="@{/product/delete/{id}(id=${product.productCode})}"><button>Delete</button></a></td>
-         <td><input  type="submit" value="Save"></td>
-       </tr>
-     </table>
+   <center>
+   <form id="form" th:action="@{/update}" method="post" >
+     <fieldset>
+     <legend>Edit Product</legend>
+     <label>Product Code</label>
+     <input type="number" name="productCode" th:value="${product.productCode}" readonly ><br>
+     <label>Product Name</label>
+     <input type="text" name="productName" th:value="${product.productName}" required><br>
+     <label>Product Price</label>
+     <input type="number"  name="productPrice" step="any" min="1" th:value="${product.productPrice}" required><br>
+     <label>Product GST</label>
+     <input type="number"  name="productGst" min="0" max="100" th:value="${product.productGst}" required><br>
+     <input class="btn" type="submit" value="Save">
+     </fieldset>
    </form>
+   </center>
 </body>
 </html>
